@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello!</title>
+    <style>
+        body {
+            background-color: #F0EBE3;
+            width:100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        main {
+            background-color: #E4DCCF;
+            height: 100vh;
+            font-size: 2rem;
+            color: #576F72;
+            padding: 20px;
+            flex: 1;
+        }
+        a{
+            color: #576F72 !important;
+        }
+        sidebar{
+            min-width: 70%;
+            max-width: 80%;
+            height:auto;
+            font-size: 2rem;
+            color: #576F72;
+            padding-left: 2%;
+        }
+        .nickname{
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+        }
+        .nickname.hidden {
+            opacity: 0;
+        }
+        button{
+            background-color: #F0EBE3;
+            border: solid #7D9D9C 2px;
+            color: #576F72;
+            font-size: 2rem;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+        .menu{
+            display: flex;
+            flex-direction: column;
+            margin: 50px;
+            padding: 30px;
+            gap: 10px;
+        }
+        .tab{
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease, max-height 0.5s ease;
+        }
+        .tab.active {
+            opacity: 1;
+            max-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; 
+            }
+            main{
+                font-size: 1.5rem;
+            }
+            sidebar{
+                min-height: fit-content;
+                max-height: 70%;
+                font-size: 1rem;
+                padding-bottom: 2%;
+                padding-left: 5%;
+            }
+            .menu{
+                margin: 30px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <sidebar>
+        <div class="tab" id="skills">
+            <h2>Skills</h2>
+            <dl>
+                <dt>Amateur</dt>
+                <dd>Kubernetes</dd>
+                <dd>Docker</dd>
+                <dd>Linux</dd>
+                <dd>JS</dd>
+                <dd>Laravel</dd>
+                <dd>MySQL</dd>
+                <dt>Intermediate</dt>
+                <dd>English</dd>
+                <dd>HTML,CSS</dd>
+                <dt>Master</dt>
+                <dd>Nothing</dd>
+            </dl>
+            <sub><i>Jack of few trades, master of none</i></sub>
+        </div>
+        <div class="tab" id="experience">
+            <h2>Experience</h2>
+            <dl>
+                <dt>PT Teleakses Solusindo</dt>
+                <dd>August 2025 - Present<br><sub>Junior Support/Devop</sub></dd>
+                
+                <br>
+                <dt>PT Ezzrale (Intern)</dt>
+                <dd>September 2024 - December 2024<br><sub>Junior Engineer</sub></dd>
+                <br>
+                <dt>PT Exeed (Intern)</dt>
+                <dd>June 2024 - August 2024<br><sub>Junior Database Engineer</sub></dd>
+                <dd></dd>
+            </dl>
+        </div>
+        <div class="tab" id="projects">
+            <h2>Projects</h2>
+            <p>[WIP]</p>    
+        </div>
+        <div class="tab" id="contact">
+            <h2>Contact</h2>
+            <dl>
+                <dt><b>Email</b></dt>
+                <dd><a href="mailto:alirezaarifi@proton.me">alirezaarifi@proton.me</a></dd>
+                <dt><b>Github</b></dt>
+                <dd><a href="https://github.com/AlirezaArifi">https://github.com/AlirezaArifi</a></dd>
+            </dl>
+        </div>
+    </sidebar>
+    <main>Hi, my name is Alireza! <br><br> You can call me <b><span class="nickname">Reza</span></b><br><br>I am an amateur Web developer, and an amateur Devop engineer<br><br><div class="menu" id="menu"><button data-target="skills">Skills</button><button data-target="experience">Experience</button><button data-target="projects">Projects</button>
+    <button data-target="contact">Contact</button></div></main>
+</body>
+<script>
+    let nickname = document.getElementsByClassName("nickname");
+    nickname_collection = ["Reza","Arifi","Rere"];
+    let nickname_count = 1
+    setInterval(() => {
+        nickname[0].classList.add("hidden");
+        setTimeout(()=>{
+            nickname[0].innerHTML = nickname_collection[nickname_count];
+            if(nickname_count >= nickname_collection.length - 1){
+                nickname_count = 0;
+            }
+            else{
+                nickname_count++;
+            }
+            nickname[0].classList.remove("hidden");
+        }, 500);
+    }, 2000);
+    const buttons = document.querySelectorAll("#menu button");
+    const tabs = document.querySelectorAll(".tab");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const target = button.dataset.target;
+
+            tabs.forEach(tab => {
+                tab.classList.toggle("active", tab.id === target);
+            });
+        });
+    });
+
+</script>
+</html>
