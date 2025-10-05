@@ -5,3 +5,4 @@ const userAction = async () => {
   const mod_one_json = await response.mod_one_response(); 
     console.log(mod_one_json);
 }
+userAction();
