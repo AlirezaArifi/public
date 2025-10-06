@@ -1,10 +1,11 @@
+Options -Indexes
 RewriteEngine On
 RewriteBase /
 
+# Redirect any .php or .html page to its extensionless version
+RewriteRule ^(.+)\.(php|html)$ /$1 [R=301,L]
 
-RewriteRule ^games/(.+)\.php$ /$1 [R=301,L]
-
-
+# Redirect all non-existent files/directories to homepage
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ / [R=302,L]
