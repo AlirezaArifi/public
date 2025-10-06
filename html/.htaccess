@@ -2,7 +2,7 @@ RewriteEngine On
 RewriteBase /
 
 
-RewriteRule ^games/(.+)\.html$ /$1 [R=301,L]
+RewriteRule ^games/(.+)\.php$ /$1 [R=301,L]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f
