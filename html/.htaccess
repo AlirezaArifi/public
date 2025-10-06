@@ -2,10 +2,24 @@ Options -Indexes
 RewriteEngine On
 RewriteBase /
 
-# Redirect any .php or .html page to its extensionless version
+# Redirect /games/ to homepage (optional)
+RedirectMatch 302 ^/games/?$ /
+
+# Internal rewrite clean URLs to .php or .html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# Redirect explicit .php/.html URLs to clean ones
 RewriteRule ^(.+)\.(php|html)$ /$1 [R=301,L]
 
-# Redirect all non-existent files/directories to homepage
+# Fallback: everything else → homepage
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ / [R=302,L]
