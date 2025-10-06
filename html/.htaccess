@@ -2,7 +2,8 @@ Options -Indexes
 RewriteEngine On
 RewriteBase /
 
-RedirectMatch 302 ^/games/?$ /
+
+RedirectMatch 301 ^/games/?$ /
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -14,8 +15,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.+)$ $1.html [L]
 
-RewriteRule ^(.+)\.(php|html)$ /$1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/([^\s]+?)\.(php|html)\s [NC]
+RewriteRule ^ %1 [R=301,L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ / [R=302,L]
+
+ErrorDocument 404 /404.html
